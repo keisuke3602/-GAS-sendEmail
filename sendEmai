@@ -17,6 +17,6 @@ function sendEmail() {
     const body = docText
       .replace('{name}', name);
 
-    GmailApp.sendEmail(recipient,subject,body,options);
+    MailApp.sendEmail(recipient,subject,body,options);
   }
 }
