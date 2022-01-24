@@ -1,6 +1,7 @@
 # -GAS-sendEmail
 
 This is for sending emails to people with Google App Script at once.
+
 In the first "fileID", put the Google Spreadsheet's ID which contains the list of email.
 In the second "fileID", put the Google Doc's ID which has a body of email.
 In the third "fileID", put an ID of image file in Google Drive. This is optional.
