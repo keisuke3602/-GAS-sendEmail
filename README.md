@@ -15,4 +15,5 @@ In the row 2,
 getActiveSheet(); should be added to match the type of parameters.
 
 getRange(row, column, optNumRows, optNumColumns)
+
 https://stackoverflow.com/questions/11947590/sheet-getrange1-1-1-12-what-does-the-numbers-in-bracket-specify
