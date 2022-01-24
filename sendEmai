@@ -5,8 +5,9 @@ function sendEmailNotInstalled() {
   const doc = DocumentApp.openById('fileID');
   const docText = doc.getBody().getText();
 
-  const attachfile = DriveApp.getFileById('fileID').getBlob();
-  const options = {attachments: attachfile};
+  const attachfile1 = DriveApp.getFileById('fileID').getBlob();
+  const attachfile2 = DriveApp.getFileById('fileID').getBlob();
+  const options = {attachments: [attachfile1,attachfile2]};
 
   for (let i = 2; i <= lastRow; i++) {
     
