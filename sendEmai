@@ -1,11 +1,10 @@
-function sendEmail() {
-  const sheet = SpreadsheetApp.openById('fileID').getActiveSheet();
+function sendEmailNotInstalled() {
+  const sheet = SpreadsheetApp.openById('fileID').getSheetByName('NotInstalled');
   const lastRow = sheet.getLastRow();
-  
+
   const doc = DocumentApp.openById('fileID');
   const docText = doc.getBody().getText();
 
-  const subject = 'Hello, this is Kei from Glasp';
   const attachfile = DriveApp.getFileById('fileID').getBlob();
   const options = {attachments: attachfile};
 
@@ -13,6 +12,9 @@ function sendEmail() {
     
     const name = sheet.getRange(i, 1).getValue();
     const recipient = sheet.getRange(i, 2).getValue();
+
+    const subject = 'Hi {name}, this is Kei'
+      .replace('{name}', name);
 
     const body = docText
       .replace('{name}', name);
