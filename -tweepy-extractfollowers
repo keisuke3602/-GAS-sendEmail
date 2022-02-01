@@ -1,0 +1,53 @@
+from requests_oauthlib import OAuth1Session
+import json
+
+CONSUMER_KEY = 'your key'
+CONSUMER_SECRET = 'your key'
+ACCESS_TOKEN = 'your key'
+ACCESS_TOKEN_SECRET = 'your key'
+
+twitter_api = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+
+import tweepy
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth,wait_on_rate_limit = True)
+
+# Extract followers
+
+import pandas as pd
+
+def extract_followers():
+user = input("Input your handle ")
+followerIDs = api.followers_ids(user)
+
+followerDatas = []
+for followerID in followerIDs:
+followerData = {}
+data = api.get_user(followerID)
+followerData["Name"] = data.name
+followerData["Username"] = data.screen_name
+followerData["Location"] = data.location
+followerDatas.append(followerData)
+
+result = followerDatas
+
+pd.set_option("display.max_rows", 20)
+global result1
+result1 = pd.DataFrame(result).loc[:,["Name","Username","Location"]]
+print(result1)
+
+extract_followers()
+
+# Make and download a file in CSV
+
+from google.colab import files
+
+def download_file():
+fileName = input("Input file name")
+AddCSV = result1.to_csv(fileName + ".csv")
+files.download(fileName + ".csv")
+
+print(fileName + " is created.")
+
+download_file()
