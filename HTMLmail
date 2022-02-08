@@ -1,0 +1,25 @@
+function sendEmailRecommend() {
+  const sheet = SpreadsheetApp.openById('your file ID').getSheetByName('Recommendation');
+  const lastRow = sheet.getLastRow();
+
+  var htmlBody = HtmlService.createHtmlOutputFromFile('Recommend').getContent();
+
+  for (let i = 2; i <= lastRow; i++) {
+    
+    const name = sheet.getRange(i, 1).getValue();
+    const recipient = sheet.getRange(i, 2).getValue();
+
+    const subject = 'Hi {name}, this is Kei'
+      .replace('{name}', name);
+
+    const body = htmlBody
+      .replace('{name}', name);
+
+    MailApp.sendEmail({
+      to: recipient,
+      subject: subject,
+      htmlBody: body,
+    });
+  }
+
+}
